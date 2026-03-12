@@ -127,7 +127,8 @@ box-shadow:0 2px 6px rgba(0,0,0,0.1);
 th,td{
 padding:8px;
 border-bottom:1px solid #eee;
-word-break:break-word;
+word-break:normal;
+overflow-wrap:break-word;
 white-space:normal;
 }
 
@@ -371,6 +372,12 @@ left:0;
 display:block;
 }
 
+}
+
+@media (max-width:900px){
+td{
+font-size:13px;
+}
 }
 
 .overlay{
@@ -811,7 +818,7 @@ const homeRaces = [
 
 ];
 
-const spreadsheet="17xPSqXClyaxVtnntfR6tW8KxoxKnSwvKJN_XJUCEdys";
+const spreadsheet="1FLImotGxbg9A4liASfbctSbRG0fX6WmtOpB60UwYoUw";
 
 const resultsCache = {};
 let currentSheet=null;
@@ -1116,8 +1123,11 @@ document.getElementById("homePage").style.display="none";
 
 history.replaceState(null,null,"index.html?race="+sheet);
 
-currentSheet=sheet;
-currentButton=btn;
+currentSheet = sheet;
+
+if(btn){
+currentButton = btn;
+}
 
 document.querySelector(".menu").classList.remove("open");
 document.querySelector(".overlay").classList.remove("show");
@@ -1243,9 +1253,11 @@ function medal(p){
 
 if(!p) return "";
 
-if(p.startsWith("1")) return "🥇";
-if(p.startsWith("2")) return "🥈";
-if(p.startsWith("3")) return "🥉";
+const pos = parseInt(p);
+
+if(pos === 1) return "🥇";
+if(pos === 2) return "🥈";
+if(pos === 3) return "🥉";
 
 return p;
 
@@ -1255,9 +1267,11 @@ function rankClass(p){
 
 if(!p) return "";
 
-if(p.startsWith("1")) return "rank1";
-if(p.startsWith("2")) return "rank2";
-if(p.startsWith("3")) return "rank3";
+const pos = parseInt(p);
+
+if(pos === 1) return "rank1";
+if(pos === 2) return "rank2";
+if(pos === 3) return "rank3";
 
 return "";
 
@@ -1356,8 +1370,8 @@ return html;
 
 }
 
-const provaNome=btn?btn.textContent.trim():"Prova";
-
+const provaNome = currentButton ? currentButton.textContent.trim() : "Prova";
+  
 document.getElementById("teamScores").innerHTML=
 
 buildTeams("Pontuação "+provaNome,raceTeams)+
@@ -1470,3 +1484,7 @@ Torneio de Natação GCP – 4ª Edição
 </footer>
 </body>
 </html>
+
+
+
+
