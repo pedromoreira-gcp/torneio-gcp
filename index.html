@@ -945,7 +945,6 @@ CLASSIFICAÇÃO GERAL
 const url=`https://opensheet.elk.sh/${spreadsheet}/M25L`;
 
 const res=await fetch(url,{cache:"no-store"});
-
 if(!res.ok) return;
 
 const data=await res.json();
@@ -981,82 +980,72 @@ pontos:parseInt(pontos)
 total.sort((a,b)=>b.pontos-a.pontos);
 
 let html="<table class='team-table'>";
-
 html+="<tr><th>Equipa</th><th>Pontos</th></tr>";
 
 total.forEach((t,i)=>{
 
-const gold = (i===0 && parseInt(t.pontos)>0) ? "team-gold" : "";
+const gold = (i===0 && t.pontos>0) ? "team-gold" : "";
 
 html+=`
 <tr class="${gold}">
 <td>${t.equipa}</td>
 <td>${t.pontos}</td>
 </tr>`;
-
 });
 
 html+="</table>";
 
 document.getElementById("homeGeneral").innerHTML=html;
 
+
 /* =====================
 PONTUAÇÃO POR PROVA
 ===================== */
 
+const scoreUrl=`https://opensheet.elk.sh/${spreadsheet}/SCOREBOARD`;
+
+const resScore=await fetch(scoreUrl,{cache:"no-store"});
+if(!resScore.ok) return;
+
+const scoreData=await resScore.json();
+
 let racesHtml="<div class='home-races-grid'>";
 
-for(const race of homeRaces){
-
-try{
-
-const url=`https://opensheet.elk.sh/${spreadsheet}/${race.sheet}`;
-
-const res=await fetch(url,{cache:"no-store"});
-if(!res.ok) continue;
-
-const data=await res.json();
-
+let currentRace="";
 let teams=[];
-let readingRace=true;
 
-data.forEach(row=>{
+function formatRaceTitle(title){
 
-const equipa=row["EQUIPA"];
-const pontos=row["PONTOS"];
+let t = title.toUpperCase();
 
-if(!equipa) return;
+t = t.replace("25M","25m")
+     .replace("50M","50m")
+     .replace("100M","100m")
 
-if(equipa==="EQUIPA") return;
+     .replace(" - FEMININO"," ♀️")
+     .replace(" - MASCULINO"," ♂️")
 
-if(equipa.includes("25M") || equipa.includes("50M") || equipa.includes("100M")) return;
+     .replace("COSTAS","↩️ COSTAS")
+     .replace("BRUÇOS","🐸 BRUÇOS")
+     .replace("MARIPOSA","🦋 MARIPOSA")
+     .replace("LIVRES","🏊 LIVRES")
+     .replace("ESTILOS","🔄 ESTILOS");
 
-if(equipa==="TOTAL"){
-readingRace=false;
-return;
+return t;
 }
 
-if(readingRace && !isNaN(pontos)){
-teams.push({
-equipa:equipa,
-pontos:parseInt(pontos)
-});
-}
+function renderRace(){
 
-});
+if(!currentRace || teams.length===0) return;
 
 teams.sort((a,b)=>b.pontos-a.pontos);
 
-if(!teams.length) continue;
-
-racesHtml+=`<div class="race-card"><h4>${race.nome}</h4>`;
+racesHtml+=`<div class="race-card"><h4>${formatRaceTitle(currentRace)}</h4>`;
 
 teams.forEach((t,i)=>{
 
 let medal="";
 let cls="";
-
-/* só atribuir medalha se tiver pontos */
 
 if(t.pontos>0){
 
@@ -1070,20 +1059,53 @@ racesHtml+=`
 <div class="${cls}">
 <span>${t.equipa} ${medal}</span>
 <span>${t.pontos}</span>
-</div>
-`;
+</div>`;
 
 });
 
 racesHtml+="</div>";
 
-}catch(e){
+}
 
-console.error("Erro prova",race.sheet);
+scoreData.forEach(row=>{
+
+const equipa=row["EQUIPA"];
+const pontos=row["PONTOS"];
+
+if(!equipa) return;
+
+/* nova prova */
+
+if(!pontos){
+
+renderRace();
+
+currentRace=equipa;
+teams=[];
+return;
 
 }
 
+/* ignorar cabeçalho */
+
+if(equipa==="EQUIPA") return;
+
+/* equipa válida */
+
+if(!isNaN(pontos)){
+
+teams.push({
+equipa:equipa,
+pontos:parseInt(pontos)
+});
+
 }
+
+});
+
+/* última prova */
+
+renderRace();
 
 racesHtml+="</div>";
 
@@ -1484,8 +1506,3 @@ Torneio de Natação GCP – 4ª Edição
 </footer>
 </body>
 </html>
-
-
-
-
-
