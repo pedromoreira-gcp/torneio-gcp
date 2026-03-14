@@ -1001,7 +1001,7 @@ CLASSIFICAÇÃO GERAL
 
 const url=`https://opensheet.elk.sh/${spreadsheet}/M25L`;
 
-const res=await fetch(url,{cache:"no-store"});
+const res = await fetch(url);
 if(!res.ok) return;
 
 const data=await res.json();
@@ -1227,7 +1227,7 @@ const url=`https://opensheet.elk.sh/${spreadsheet}/${sheet}`;
 
 let data;
 
-const res = await fetch(url, { cache: "no-store" });
+const res = await fetch(url);
 
 if(!res.ok){
 console.error("Erro ao carregar sheet",sheet);
