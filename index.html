@@ -7,6 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Torneio de Natação GCP – 4ª Edição</title>
 
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+<script data-goatcounter="https://gcptorneio.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
 <style>
 
 body{
@@ -92,7 +99,7 @@ height:70px;
 
 .layout{
 display:grid;
-grid-template-columns:220px 1fr 290px;
+grid-template-columns:280px 1fr 320px;
 gap:20px;
 max-width:1400px;
 margin:auto;
@@ -351,8 +358,8 @@ grid-template-columns:1fr;
 .menu{
 position:fixed;
 top:0;
-left:-220px;
-width:200px;
+left:-280px;
+width:260px;
 height:100%;
 background:#ffffff;
 border-right:2px solid #e3e7ee;
@@ -646,6 +653,33 @@ grid-template-columns:1fr;
 display:none !important;
 }
 
+.sponsor-box{
+margin-top:14px;
+text-align:left;
+}
+
+.sponsor{
+display:block;
+margin:10px 0;
+}
+
+.sponsor{
+aspect-ratio:3/1;
+display:flex;
+align-items:center;
+justify-content:center;
+background:white;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin:10px 0;
+padding:6px;
+}
+
+.sponsor img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
 
 footer{
 text-align:center;
@@ -779,6 +813,21 @@ border-top:1px solid #ddd;
 
 <div class="teams-box" id="raceBox">
 <div id="teamScores"></div>
+</div>
+
+<div class="teams-box sponsor-box">
+<h3>🙏 Agradecimento</h3>
+<a href="https://www.h2ovita.com/pt/nadar/escola-de-natacao" target="_blank" class="sponsor">
+<img src="logo_h2o-vita.png">
+</a>
+
+<a href="https://www.jf-parquedasnacoes.pt/autarquia/10-desporto/27" target="_blank" class="sponsor">
+<img src="logo_oriente.png">
+</a>
+
+<a href="https://www.proswim.pt/" target="_blank" class="sponsor">
+<img src="logo_proswim-academy.png">
+</a>
 </div>
 
 </div>
@@ -1018,9 +1067,9 @@ function formatRaceTitle(title){
 
 let t = title.toUpperCase();
 
-t = t.replace("25M","25")
-     .replace("50M","50")
-     .replace("100M","100")
+t = t.replace("25M","25m")
+     .replace("50M","50m")
+     .replace("100M","100m")
 
      .replace(" - FEMININO"," ♀️")
      .replace(" - MASCULINO"," ♂️")
@@ -1506,7 +1555,6 @@ Torneio de Natação GCP – 4ª Edição
 </footer>
 </body>
 </html>
-
 
 
 
