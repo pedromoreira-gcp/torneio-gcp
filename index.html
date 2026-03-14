@@ -681,6 +681,12 @@ max-height:100%;
 object-fit:contain;
 }
 
+#viewerCount{
+font-size:11px;
+color:#444;
+margin-left:10px;
+}
+
 footer{
 text-align:center;
 padding:20px;
@@ -765,6 +771,7 @@ border-top:1px solid #ddd;
 <div class="race-title">
 <div id="raceTitle">🏊 Torneio de Natação GCP</div>
 <div id="raceSub" class="race-sub">Resumo da competição</div>
+<span id="viewerCount">👥 -- pessoas a acompanhar</span>
 <div class="race-legend">
 <span class="legend-x"><b>X</b> Inscrito</span>
 <span class="legend-dns"><b>DNS</b> Não compareceu</span>
@@ -1547,8 +1554,39 @@ document.getElementById("refreshTimer").textContent=refreshCountdown;
 
 },1000);
 
-</script>
+const firebaseConfig = {
+apiKey: "AIzaSyBYTx6s0XhoBblzvuGwrtmZfDn8Y7eeLsU",
+authDomain: "gcp-scoreboard.firebaseapp.com",
+databaseURL: "https://gcp-scoreboard-default-rtdb.europe-west1.firebasedatabase.app",
+projectId: "gcp-scoreboard",
+storageBucket: "gcp-scoreboard.firebasestorage.app",
+messagingSenderId: "1080911760734",
+appId: "1:1080911760734:web:9c81066ef9aac4cb6693cf"
+};
 
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+const usersRef = db.ref("onlineUsers");
+
+const userRef = usersRef.push();
+
+userRef.set(true);
+
+userRef.onDisconnect().remove();
+
+usersRef.on("value", snapshot => {
+
+const count = snapshot.numChildren();
+
+document.getElementById("viewerCount").textContent =
+"👥 "+count+" pessoas a acompanhar";
+
+});
+
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 <footer>
 Ginásio Clube Português • Piscina Campo de Ourique<br>
 Torneio de Natação GCP – 4ª Edição
