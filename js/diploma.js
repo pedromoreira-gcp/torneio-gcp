@@ -3,7 +3,7 @@ let atletas = [];
 async function loadAthletes(){
 
 const url =
-"https://opensheet.elk.sh/17xPSqXClyaxVtnntfR6tW8KxoxKnSwvKJN_XJUCEdys/ATLETAS";
+"https://opensheet.elk.sh/17xPSqXClyaxVtnntfR6tW8KxoxKnSwvKJN_XJUCEdys/DIPLOMAS";
 
 const res = await fetch(url);
 
