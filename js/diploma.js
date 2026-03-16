@@ -134,9 +134,9 @@ const template = document.getElementById("diplomaTemplate");
 
 document.getElementById("pdfNome").textContent = getValue(atleta,"NOME");
 
-const clube = getValue(atleta,"CLUBE");
-const escalao = getValue(atleta,"ESCALAO");
-const genero = getValue(atleta,"GENERO");
+const clube = atleta["CLUBE"] || "-";
+const escalao = atleta["ESCALÃO"] || "-";
+const genero = atleta["GÉNERO"] || "-";
 
 document.getElementById("pdfInfo").textContent =
 "Clube: " + clube + " • Escalão: " + escalao + " • Género: " + genero;
