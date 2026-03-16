@@ -45,7 +45,7 @@ const container = document.getElementById("athleteResults");
 
 container.innerHTML = "";
 
-list.slice(0,10).forEach((a,i) => {
+list.slice(0,10).forEach(a => {
 
 let html = `
 <div class="athlete-card">
@@ -91,7 +91,7 @@ html += `
 });
 
 html += `
-<button class="download-btn" onclick="gerarDiploma(${i})">
+<button class="download-btn" onclick="gerarDiploma(${atletas.indexOf(a)})">
 ⬇️ Download Diploma
 </button>
 
@@ -118,24 +118,35 @@ async function gerarDiploma(index){
 
 const atleta = atletas[index];
 
-if(!atleta){
-alert("Erro ao gerar diploma");
-return;
-}
+console.log(atleta);
 
 const template = document.getElementById("diplomaTemplate");
 
 document.getElementById("pdfNome").textContent = atleta["NOME"];
 
+function getValue(obj,key){
+
+const k = Object.keys(obj).find(
+c => c.trim().toUpperCase() === key
+);
+
+return k ? obj[k] : "";
+
+}
+
+const clube = atleta["CLUBE"];
+const escalao = atleta["ESCALÃO"];
+const genero = atleta["GÉNERO"];
+
 document.getElementById("pdfInfo").textContent =
-"Clube: " + atleta["CLUBE"] +
-" - Escalão: " + atleta["ESCALÃO"] +
-" - Género: " + atleta["GÉNERO"];
+"Clube: " + clube + " - Escalão: " + escalao + " - Género: " + genero;
 
 const resultados = document.getElementById("pdfResultados");
+
 resultados.innerHTML="";
 
 const provas=[
+
 "25M LIVRES",
 "50M LIVRES",
 "25M MARIPOSA",
@@ -145,6 +156,7 @@ const provas=[
 "25M BRUÇOS",
 "50M BRUÇOS",
 "100M ESTILOS"
+
 ];
 
 provas.forEach(p=>{
@@ -152,26 +164,27 @@ provas.forEach(p=>{
 const tempo = atleta[p];
 
 if(tempo && tempo!=="X"){
+
 resultados.innerHTML+=`
 <div class="diploma-result">
 <span>${p}</span>
 <span>${tempo}</span>
-</div>`;
+</div>
+`;
+
 }
 
 });
 
-const canvas = await html2canvas(template,{scale:2});
+const canvas = await html2canvas(template);
 
 const img = canvas.toDataURL("image/png");
 
-const pdf = new jspdf.jsPDF({
-orientation:"landscape",
-unit:"mm",
-format:"a4"
-});
+const { jsPDF } = window.jspdf;
 
-pdf.addImage(img,"PNG",10,10,277,190);
+const pdf = new jsPDF("landscape");
+
+pdf.addImage(img,"PNG",10,10,270,180);
 
 pdf.save("diploma_"+atleta["NOME"]+".pdf");
 
