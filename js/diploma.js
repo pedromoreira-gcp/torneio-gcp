@@ -139,7 +139,7 @@ const escalao = atleta["ESCALÃO"];
 const genero = atleta["GÉNERO"];
 
 document.getElementById("pdfInfo").textContent =
-"Clube: " + clube + " - Escalão: " + escalao + " - Género: " + genero;
+"Clube: " + clube + " • Escalão: " + escalao + " • Género: " + genero;
 
 const resultados = document.getElementById("pdfResultados");
 
