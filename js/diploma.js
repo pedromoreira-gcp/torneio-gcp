@@ -104,10 +104,20 @@ container.innerHTML += html;
 
 }
 
+function normalize(str){
+return str
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.trim()
+.toUpperCase();
+}
+
 function getValue(obj,key){
 
+const target = normalize(key);
+
 const k = Object.keys(obj).find(
-c => c.trim().toUpperCase() === key
+c => normalize(c) === target
 );
 
 return k ? obj[k] : "";
@@ -122,7 +132,7 @@ console.log(atleta);
 
 const template = document.getElementById("diplomaTemplate");
 
-document.getElementById("pdfNome").textContent = atleta["NOME"];
+document.getElementById("pdfNome").textContent = getValue(atleta,"NOME");
 
 const clube = getValue(atleta,"CLUBE");
 const escalao = getValue(atleta,"ESCALAO");
