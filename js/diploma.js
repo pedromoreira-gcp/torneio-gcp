@@ -124,19 +124,9 @@ const template = document.getElementById("diplomaTemplate");
 
 document.getElementById("pdfNome").textContent = atleta["NOME"];
 
-function getValue(obj,key){
-
-const k = Object.keys(obj).find(
-c => c.trim().toUpperCase() === key
-);
-
-return k ? obj[k] : "";
-
-}
-
-const clube = atleta["CLUBE"];
-const escalao = atleta["ESCALÃO"];
-const genero = atleta["GÉNERO"];
+const clube = getValue(atleta,"CLUBE");
+const escalao = getValue(atleta,"ESCALAO");
+const genero = getValue(atleta,"GENERO");
 
 document.getElementById("pdfInfo").textContent =
 "Clube: " + clube + " • Escalão: " + escalao + " • Género: " + genero;
