@@ -678,3 +678,96 @@ color:#666;
 background:#f3f5f8;
 border-top:1px solid #ddd;
 }
+
+.diploma-search{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin-top:10px;
+}
+
+.diploma-search input{
+width:100%;
+padding:10px;
+font-size:16px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.athlete-card{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin-top:15px;
+}
+
+.result-row{
+display:flex;
+justify-content:space-between;
+padding:6px 0;
+border-bottom:1px solid #eee;
+}
+
+.download-btn{
+margin-top:12px;
+padding:10px 16px;
+background:#0c2d57;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.diploma-pdf{
+width:1000px;
+padding:60px;
+background:white;
+border:8px solid #0c2d57;
+text-align:center;
+font-family:Arial;
+position:fixed;
+top:-2000px;
+left:0;
+}
+
+.diploma-header img{
+height:80px;
+margin-bottom:10px;
+}
+
+.diploma-header h1{
+margin:5px;
+color:#0c2d57;
+}
+
+.diploma-header h2{
+margin:5px;
+font-weight:normal;
+}
+
+.diploma-name{
+font-size:36px;
+font-weight:bold;
+margin:30px 0;
+}
+
+.diploma-info{
+font-size:16px;
+margin-bottom:25px;
+}
+
+.diploma-result{
+display:flex;
+justify-content:center;
+gap:40px;
+margin:4px 0;
+font-size:16px;
+}
+
+.diploma-footer{
+margin-top:40px;
+font-size:14px;
+}
