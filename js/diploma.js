@@ -219,3 +219,17 @@ pdf.addImage(imgData, "PNG", 15, 15, 267, 180);
 pdf.save("diploma_"+atleta["NOME"]+".pdf");
 
 }
+
+/* ===============================
+MENU MOBILE
+=============================== */
+
+function toggleMenu(){
+
+const menu=document.querySelector(".menu");
+const overlay=document.querySelector(".overlay");
+
+menu.classList.toggle("open");
+overlay.classList.toggle("show");
+
+}
