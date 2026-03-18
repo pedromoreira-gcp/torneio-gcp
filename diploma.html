@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Diplomas – Torneio GCP</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+
+<script data-goatcounter="https://gcptorneio.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-left">
+
+<img src="img/logo.svg">
+
+<div class="header-text">
+<h1>Torneio de Natação GCP – 4ª Edição (2025/2026)</h1>
+<div class="header-sub">📍 Piscina Campo de Ourique • 📅 15 Março 2026</div>
+</div>
+
+</div>
+
+</header>
+
+<div class="header-gap"></div>
+
+<button class="menu-toggle" onclick="toggleMenu()">☰ Provas</button>
+
+<div class="layout">
+
+<div class="menu">
+
+<div class="menu-block inicio-menu">
+<button onclick="window.location.href='index.html'">🏠 Página Inicial</button>
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="race-title">
+🎓 Diplomas - Procurar Atleta
+</div>
+
+<div class="diploma-search">
+
+<input
+id="searchAthlete"
+placeholder="🔎 Procurar por nome ou nº atleta"
+oninput="searchAthlete()"
+/>
+
+</div>
+
+<div id="athleteResults"></div>
+
+</div>
+<div class="teams-panel" id="rightColumn">
+
+<div class="teams-box" id="sponsor-box">
+<h3>🙏 Agradecimento</h3>
+<a href="https://www.h2ovita.com/pt/nadar/escola-de-natacao" target="_blank" class="sponsor">
+<img src="img/logo_h2o-vita.png">
+</a>
+
+<a href="https://www.jf-parquedasnacoes.pt/autarquia/10-desporto/27" target="_blank" class="sponsor">
+<img src="img/logo_oriente.png">
+</a>
+
+<a href="https://www.proswim.pt/" target="_blank" class="sponsor">
+<img src="img/logo_proswim-academy.png">
+</a>
+</div>
+
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/diploma.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  
+<div id="diplomaTemplate" class="diploma-pdf">
+
+<div class="diploma-header">
+<img src="img/logo-gcp.jpg">
+<h1>Torneio de Natação GCP 4ª Edição</h1>
+<h2>Diploma de Participação</h2>
+</div>
+
+<div class="diploma-body">
+
+<div class="diploma-name" id="pdfNome"></div>
+
+<div class="diploma-info" id="pdfInfo"></div>
+
+<div id="pdfResultados"></div>
+
+</div>
+
+<div class="diploma-signature">
+
+<img src="img/ass-v2.png" class="signature-img">
+
+<div class="signature-line"></div>
+
+<div class="signature-text">
+O Presidente da Direcção
+</div>
+
+</div>
+
+<div class="diploma-footer">
+</div>
+
+</div>
+<footer>
+Ginásio Clube Português • Piscina Campo de Ourique<br>
+Torneio de Natação GCP – 4ª Edição
+</footer>
+</body>
+</html>
